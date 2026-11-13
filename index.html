@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>Melva.id — Top Up Game</title>
+<style>
+:root{--bg:#101010;--panel:#1a1a1a;--panel2:#222;--orange:#ff7a18;--orange2:#ff9b45;--text:#f7f7f7;--muted:#aaa}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -15%,#48200b 0,transparent 34%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.wrap{max-width:900px;margin:auto;padding:26px 18px 56px}.brand{text-align:center;padding:18px 0 24px}.logo{width:68px;height:68px;border-radius:22px;background:linear-gradient(135deg,var(--orange),#c94800);display:grid;place-items:center;margin:0 auto 12px;font-size:34px;font-weight:900;box-shadow:0 8px 30px #ff7a1838}.brand h1{margin:0;font-size:30px;letter-spacing:1.5px}.brand h1 span{color:var(--orange)}.brand p{color:var(--muted);margin:6px 0 0}.hero{background:linear-gradient(120deg,#2a160c,#1b1b1b 68%);border:1px solid #50301c;border-radius:20px;padding:22px;margin-bottom:24px}.hero h2{margin:0 0 6px;font-size:23px}.hero p{margin:0;color:#c9c9c9}.search{width:100%;margin-top:17px;background:#101010;border:1px solid #444;border-radius:12px;padding:13px 15px;color:white;font:inherit;outline:none}.search:focus{border-color:var(--orange)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:25px 0 13px}.section-head h2{font-size:19px;margin:0}.section-head small{color:var(--muted)}.games{display:grid;grid-template-columns:repeat( auto-fit,minmax(145px,1fr));gap:12px}.game{background:var(--panel);border:1px solid #303030;border-radius:15px;padding:15px 12px;text-align:left;color:var(--text);cursor:pointer;transition:.18s;min-height:112px}.game:hover,.game.active{border-color:var(--orange);background:#261a12;transform:translateY(-2px)}.game .emoji{font-size:27px;display:block;margin-bottom:7px}.game strong{display:block;font-size:14px}.game small{color:var(--muted)}.catalog{margin-top:25px;background:var(--panel);border:1px solid #333;border-radius:18px;padding:18px;display:none}.catalog.show{display:block}.catalog-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.catalog h3{margin:0;font-size:19px}.catalog-top button{background:none;border:0;color:var(--orange);cursor:pointer;font:inherit}.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.product{border:1px solid #383838;background:#202020;border-radius:12px;padding:13px;display:flex;align-items:center;justify-content:space-between;gap:10px}.product strong{display:block;font-size:14px}.product small{color:var(--muted)}.buy{border:0;background:var(--orange);color:#17100a;font-weight:800;padding:9px 12px;border-radius:9px;cursor:pointer;white-space:nowrap}.buy:hover{background:var(--orange2)}.note{margin-top:13px;color:var(--muted);font-size:12px}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}.step{background:var(--panel);border:1px solid #303030;border-radius:13px;padding:14px}.step b{color:var(--orange);display:block;margin-bottom:4px}.contact{display:flex;justify-content:center;margin:25px 0 0}.contact a{background:#168b4b;color:white;text-decoration:none;padding:13px 19px;border-radius:12px;font-weight:750}.footer{text-align:center;color:#777;font-size:12px;margin-top:30px}.empty{color:var(--muted);padding:12px 0;display:none}
+@media(max-width:480px){.wrap{padding:18px 13px 42px}.hero{padding:18px}.hero h2{font-size:20px}.games{grid-template-columns:repeat(2,minmax(0,1fr))}.products{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="brand">
+    <div class="logo">M</div>
+    <h1>MELVA<span>.ID</span></h1>
+    <p>Top Up Game Favoritmu • Praktis • via WhatsApp</p>
+  </header>
+  <section class="hero">
+    <h2>Top Up Game Jadi Lebih Gampang!</h2>
+    <p>Pilih game dan nominal yang kamu inginkan. Pesanan langsung dikirim ke admin Melva.id melalui WhatsApp.</p>
+    <input class="search" id="search" type="search" placeholder="Cari game favorit kamu..." aria-label="Cari game">
+  </section>
+
+  <div class="section-head"><h2>Pilih Game</h2><small id="count">Semua game</small></div>
+  <section class="games" id="games"></section>
+  <div class="empty" id="empty">Game tidak ditemukan. Coba kata kunci lain.</div>
+
+  <section class="catalog" id="catalog" aria-live="polite">
+    <div class="catalog-top"><h3 id="gameTitle">Pilih Produk</h3><button id="close" type="button">Tutup ✕</button></div>
+    <div class="products" id="products"></div>
+    <p class="note">Harga dan ketersediaan dikonfirmasi oleh admin melalui WhatsApp sebelum pembayaran.</p>
+  </section>
+
+  <div class="section-head"><h2>Cara Order</h2></div>
+  <section class="steps">
+    <div class="step"><b>01 — Pilih game</b>Pilih game yang ingin kamu top up.</div>
+    <div class="step"><b>02 — Pilih nominal</b>Pilih produk atau nominal yang tersedia.</div>
+    <div class="step"><b>03 — Chat WhatsApp</b>Detail pesanan otomatis dikirim ke admin.</div>
+  </section>
+  <div class="contact"><a href="https://wa.me/6285772899734?text=Halo%20Melva.id%2C%20saya%20ingin%20bertanya%20tentang%20top%20up%20game." target="_blank" rel="noopener">Chat Admin WhatsApp</a></div>
+  <footer class="footer">© <span id="year"></span> Melva.id. All rights reserved.</footer>
+</main>
+<script>
+const WA='6285772899734';
+const games=[
+ {name:'Mobile Legends',emoji:'⚔️',items:['5 Diamonds','12 Diamonds','28 Diamonds','59 Diamonds','85 Diamonds','170 Diamonds','257 Diamonds','Weekly Diamond Pass']},
+ {name:'Free Fire',emoji:'🔥',items:['5 Diamonds','12 Diamonds','50 Diamonds','70 Diamonds','140 Diamonds','355 Diamonds','720 Diamonds','Membership Mingguan']},
+ {name:'PUBG Mobile',emoji:'🪖',items:['60 UC','325 UC','660 UC','1.800 UC','3.850 UC','8.100 UC']},
+ {name:'Honor of Kings',emoji:'👑',items:['8 Tokens','16 Tokens','80 Tokens','240 Tokens','400 Tokens','800 Tokens']},
+ {name:'Genshin Impact',emoji:'✨',items:['60 Genesis Crystals','Blessing of the Welkin Moon','300 Genesis Crystals','980 Genesis Crystals','1.980 Genesis Crystals','3.280 Genesis Crystals']},
+ {name:'Honkai: Star Rail',emoji:'🚄',items:['60 Oneiric Shards','Express Supply Pass','300 Oneiric Shards','980 Oneiric Shards','1.980 Oneiric Shards']},
+ {name:'Call of Duty Mobile',emoji:'🎯',items:['31 CP','63 CP','128 CP','321 CP','645 CP','1.300 CP']},
+ {name:'Valorant',emoji:'🎮',items:['125 VP','420 VP','700 VP','1.375 VP','2.400 VP','4.000 VP']},
+ {name:'Roblox',emoji:'🧱',items:['Robux  Robux  ' .trim(),'80 Robux','160 Robux','400 Robux','800 Robux','1.700 Robux']},
+ {name:'Steam Wallet',emoji:'💳',items:['Steam Wallet Rp 12.000','Steam Wallet Rp 45.000','Steam Wallet Rp 60.000','Steam Wallet Rp 90.000','Steam Wallet Rp 120.000','Steam Wallet Rp 250.000']},
+ {name:'Aplikasi & Voucher',emoji:'🎁',items:['Google Play Gift Card','iTunes Gift Card','Garena Shells','PlayStation Store','Nintendo eShop']}
+];
+const gamesEl=document.getElementById('games'),catalog=document.getElementById('catalog'),productsEl=document.getElementById('products');
+let selected=null;
+function renderGames(filter=''){
+ gamesEl.innerHTML='';let shown=games.filter(g=>g.name.toLowerCase().includes(filter.toLowerCase()));
+ document.getElementById('count').textContent=filter?shown.length+' hasil':'Semua game';
+ document.getElementById('empty').style.display=shown.length?'none':'block';
+ shown.forEach(g=>{let b=document.createElement('button');b.className='game'+(selected===g.name?' active':'');b.type='button';b.innerHTML=`<span class="emoji">${g.emoji}</span><strong>${g.name}</strong><small>Pilih produk →</small>`;b.addEventListener('click',()=>showProducts(g));gamesEl.appendChild(b)});
+}
+function showProducts(g){
+ selected=g.name;renderGames(document.getElementById('search').value);
+ document.getElementById('gameTitle').textContent=g.name;
+ productsEl.innerHTML='';
+ g.items.forEach(item=>{let row=document.createElement('div');row.className='product';let info=document.createElement('div');info.innerHTML=`<strong>${item}</strong><small>Harga: konfirmasi admin</small>`;let btn=document.createElement('button');btn.className='buy';btn.type='button';btn.textContent='Pesan';btn.addEventListener('click',()=>order(g.name,item));row.append(info,btn);productsEl.appendChild(row)});
+ catalog.classList.add('show');catalog.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function order(game,item){
+ const msg=`Halo Melva.id, saya ingin order:%0A%0AGame: ${encodeURIComponent(game)}%0AProduk: ${encodeURIComponent(item)}%0AUser ID: %0AServer/Zone (jika ada): %0A%0AMohon info harga dan cara pembayarannya.`;
+ window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener');
+}
+document.getElementById('search').addEventListener('input',e=>renderGames(e.target.value));
+document.getElementById('close').addEventListener('click',()=>{catalog.classList.remove('show');selected=null;renderGames(document.getElementById('search').value)});
+document.getElementById('year').textContent=new Date().getFullYear();
+renderGames();
+</script>
+</body>
+</html>
