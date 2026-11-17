@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101010" />
+  <title>Melva.id — Game Top Up</title>
+  <style>
+    :root{--bg:#0d0d0f;--panel:#171719;--panel2:#202024;--orange:#ff7a18;--orange2:#ff9b43;--text:#f7f7f7;--muted:#a5a5ad;--line:#303036}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#2a160b 0,transparent 32%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+    .wrap{max-width:1120px;margin:auto;padding:24px 18px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:34px}.brand{font-size:28px;font-weight:900;letter-spacing:-1px}.brand span{color:var(--orange)}.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:9px 13px;border-radius:30px}
+    .hero{padding:42px 30px;border:1px solid #4b2a17;border-radius:24px;background:linear-gradient(115deg,#21140d,#171719 65%);margin-bottom:28px}.eyebrow{color:var(--orange2);font-weight:bold;text-transform:uppercase;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.04;margin:12px 0}.hero p{color:var(--muted);max-width:600px;line-height:1.6;margin:0}.hero strong{color:white}
+    .toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:24px 0 18px;flex-wrap:wrap}.toolbar h2{margin:0;font-size:22px}.search{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:white;width:min(100%,310px);outline:none}.search:focus{border-color:var(--orange)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.game{background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:17px;padding:19px;transition:.2s}.game:hover{transform:translateY(-3px);border-color:#9b4b1b}.game-icon{width:54px;height:54px;border-radius:15px;background:#332012;display:grid;place-items:center;font-size:27px;margin-bottom:14px}.game h3{margin:0 0 7px;font-size:17px}.game p{margin:0 0 16px;color:var(--muted);font-size:13px;min-height:32px;line-height:1.45}.game button,.wa{width:100%;border:0;border-radius:10px;padding:12px 14px;background:var(--orange);color:#17100a;font-weight:800;cursor:pointer}.game button:hover,.wa:hover{background:var(--orange2)}
+    .how{margin-top:30px;background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:17px}.how h2{margin:0 0 12px}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.step{color:var(--muted);font-size:14px;line-height:1.5}.step b{display:block;color:white;margin-bottom:5px}.footer{text-align:center;color:#777;font-size:12px;margin-top:32px}
+    .modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.show{display:flex}.dialog{width:min(100%,440px);background:#19191c;border:1px solid #4b2a17;border-radius:18px;padding:22px;box-shadow:0 20px 70px #000}.dialog-head{display:flex;justify-content:space-between;align-items:center}.dialog h2{margin:0;font-size:21px}.close{background:none;border:0;color:#bbb;font-size:26px;cursor:pointer}.dialog p{color:var(--muted);font-size:13px;line-height:1.5}.field{display:block;margin:14px 0}.field span{display:block;font-size:13px;margin-bottom:7px;color:#ddd}.field input,.field select{width:100%;padding:12px;background:#101012;color:white;border:1px solid var(--line);border-radius:9px;outline:none}.field input:focus,.field select:focus{border-color:var(--orange)}.wa{margin-top:8px}.note{text-align:center;color:#777;font-size:11px;margin-top:13px}
+    @media(max-width:560px){.wrap{padding:17px 14px 40px}.hero{padding:30px 21px}.tag{font-size:10px}.brand{font-size:24px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top"><div class="brand">melva<span>.id</span></div><div class="tag">TOP UP GAME • CEPAT & MUDAH</div></header>
+    <section class="hero"><div class="eyebrow">Welcome to Melva.id</div><h1>Top Up Game<br><span style="color:var(--orange)">Mudah & Praktis.</span></h1><p>Pilih game favorit kamu, tentukan kebutuhan top up, lalu <strong>lanjutkan pesanan langsung melalui WhatsApp admin.</strong></p></section>
+    <section class="toolbar"><h2>Pilih Game Favorit</h2><input id="search" class="search" type="search" placeholder="Cari game..." aria-label="Cari game" /></section>
+    <section class="grid" id="games">
+      <article class="game" data-name="mobile legends ml"><div class="game-icon">⚔️</div><h3>Mobile Legends</h3><p>Diamond MLBB</p><button onclick="openOrder('Mobile Legends','Diamond')">Pilih Produk</button></article>
+      <article class="game" data-name="free fire ff"><div class="game-icon">🔥</div><h3>Free Fire</h3><p>Diamond Free Fire</p><button onclick="openOrder('Free Fire','Diamond')">Pilih Produk</button></article>
+      <article class="game" data-name="pubg mobile"><div class="game-icon">🎯</div><h3>PUBG Mobile</h3><p>UC PUBG Mobile</p><button onclick="openOrder('PUBG Mobile','UC')">Pilih Produk</button></article>
+      <article class="game" data-name="honor of kings hok"><div class="game-icon">👑</div><h3>Honor of Kings</h3><p>Token Honor of Kings</p><button onclick="openOrder('Honor of Kings','Token')">Pilih Produk</button></article>
+      <article class="game" data-name="genshin impact"><div class="game-icon">✨</div><h3>Genshin Impact</h3><p>Genesis Crystal</p><button onclick="openOrder('Genshin Impact','Genesis Crystal')">Pilih Produk</button></article>
+      <article class="game" data-name="honkai star rail hsr"><div class="game-icon">🚄</div><h3>Honkai: Star Rail</h3><p>Oneiric Shard</p><button onclick="openOrder('Honkai: Star Rail','Oneiric Shard')">Pilih Produk</button></article>
+      <article class="game" data-name="call of duty mobile codm"><div class="game-icon">🪖</div><h3>Call of Duty Mobile</h3><p>CP CODM</p><button onclick="openOrder('Call of Duty Mobile','CP')">Pilih Produk</button></article>
+      <article class="game" data-name="valorant"><div class="game-icon">💥</div><h3>Valorant</h3><p>Valorant Points</p><button onclick="openOrder('Valorant','VP')">Pilih Produk</button></article>
+      <article class="game" data-name="roblox"><div class="game-icon">🧱</div><h3>Roblox</h3><p>Robux</p><button onclick="openOrder('Roblox','Robux')">Pilih Produk</button></article>
+      <article class="game" data-name="steam wallet"><div class="game-icon">🎮</div><h3>Steam Wallet</h3><p>Steam Wallet Code</p><button onclick="openOrder('Steam Wallet','Steam Wallet Code')">Pilih Produk</button></article>
+      <article class="game" data-name="aplikasi voucher lainnya"><div class="game-icon">🎁</div><h3>Aplikasi & Voucher</h3><p>Voucher digital lainnya</p><button onclick="openOrder('Aplikasi & Voucher','Voucher')">Pilih Produk</button></article>
+    </section>
+    <section class="how"><h2>Cara Order</h2><div class="steps"><div class="step"><b>01. Pilih Game</b>Pilih game atau voucher yang ingin dibeli.</div><div class="step"><b>02. Isi Detail</b>Masukkan ID akun dan nominal top up.</div><div class="step"><b>03. Chat Admin</b>Kirim format pesanan melalui WhatsApp untuk konfirmasi harga dan pembayaran.</div></div></section>
+    <div class="footer">© <span id="year"></span> Melva.id. All rights reserved.</div>
+  </main>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><div class="dialog-head"><h2 id="modalTitle">Detail Pesanan</h2><button class="close" onclick="closeOrder()" aria-label="Tutup">×</button></div><p>Lengkapi detail berikut. Admin akan mengonfirmasi ketersediaan dan harga melalui WhatsApp.</p><form id="orderForm"><label class="field"><span>Game</span><input id="gameName" readonly /></label><label class="field"><span>Produk</span><input id="productName" readonly /></label><label class="field"><span>User ID / ID Akun</span><input id="userId" required placeholder="Masukkan User ID" /></label><label class="field"><span>Server / Zone ID (jika ada)</span><input id="serverId" placeholder="Masukkan Server ID (opsional)" /></label><label class="field"><span>Nominal / Paket</span><input id="nominal" required placeholder="Contoh: 86 Diamond" /></label><label class="field"><span>Catatan (opsional)</span><input id="notes" placeholder="Catatan tambahan" /></label><button class="wa" type="submit">Lanjutkan ke WhatsApp</button></form><div class="note">Harga dan metode pembayaran dikonfirmasi oleh admin.</div></div></div>
+  <script>
+    // Nomor WhatsApp admin Melva.id — format internasional tanpa tanda +
+    const WA = '628895323909';
+    const modal = document.getElementById('modal');
+    function openOrder(game, product){document.getElementById('gameName').value=game;document.getElementById('productName').value=product;modal.classList.add('show');document.getElementById('userId').focus();}
+    function closeOrder(){modal.classList.remove('show');}
+    modal.addEventListener('click',e=>{if(e.target===modal)closeOrder();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOrder();});
+    document.getElementById('orderForm').addEventListener('submit',e=>{e.preventDefault();const game=document.getElementById('gameName').value;const product=document.getElementById('productName').value;const user=document.getElementById('userId').value.trim();const server=document.getElementById('serverId').value.trim();const nominal=document.getElementById('nominal').value.trim();const notes=document.getElementById('notes').value.trim();const msg=`Halo Admin Melva.id, saya ingin order top up.\n\nGame: ${game}\nProduk: ${product}\nUser ID: ${user}\nServer/Zone ID: ${server||'-'}\nNominal/Paket: ${nominal}\nCatatan: ${notes||'-'}\n\nMohon info harga dan proses selanjutnya. Terima kasih.`;window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank','noopener');});
+    document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.game').forEach(card=>{card.style.display=card.dataset.name.includes(q)?'':'none';});});
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
