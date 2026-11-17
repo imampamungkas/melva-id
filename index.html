@@ -14,6 +14,12 @@
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.game{background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:17px;padding:19px;transition:.2s}.game:hover{transform:translateY(-3px);border-color:#9b4b1b}.game-icon{width:54px;height:54px;border-radius:15px;background:#332012;display:grid;place-items:center;font-size:27px;margin-bottom:14px}.game h3{margin:0 0 7px;font-size:17px}.game p{margin:0 0 16px;color:var(--muted);font-size:13px;min-height:32px;line-height:1.45}.game button,.wa{width:100%;border:0;border-radius:10px;padding:12px 14px;background:var(--orange);color:#17100a;font-weight:800;cursor:pointer}.game button:hover,.wa:hover{background:var(--orange2)}
     .how{margin-top:30px;background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:17px}.how h2{margin:0 0 12px}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.step{color:var(--muted);font-size:14px;line-height:1.5}.step b{display:block;color:white;margin-bottom:5px}.footer{text-align:center;color:#777;font-size:12px;margin-top:32px}
     .modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.show{display:flex}.dialog{width:min(100%,440px);background:#19191c;border:1px solid #4b2a17;border-radius:18px;padding:22px;box-shadow:0 20px 70px #000}.dialog-head{display:flex;justify-content:space-between;align-items:center}.dialog h2{margin:0;font-size:21px}.close{background:none;border:0;color:#bbb;font-size:26px;cursor:pointer}.dialog p{color:var(--muted);font-size:13px;line-height:1.5}.field{display:block;margin:14px 0}.field span{display:block;font-size:13px;margin-bottom:7px;color:#ddd}.field input,.field select{width:100%;padding:12px;background:#101012;color:white;border:1px solid var(--line);border-radius:9px;outline:none}.field input:focus,.field select:focus{border-color:var(--orange)}.wa{margin-top:8px}.note{text-align:center;color:#777;font-size:11px;margin-top:13px}
+
+    .robux-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .robux-option{border:1px solid var(--line);border-radius:11px;background:#101012;color:var(--text);padding:13px;text-align:left;cursor:pointer}
+    .robux-option:hover{border-color:var(--orange);background:#26170e}
+    .robux-option b{display:block;font-size:15px;margin-bottom:5px}
+    .robux-option span{color:var(--orange2);font-weight:800;font-size:14px}
     @media(max-width:560px){.wrap{padding:17px 14px 40px}.hero{padding:30px 21px}.tag{font-size:10px}.brand{font-size:24px}}
   </style>
 </head>
@@ -31,18 +37,53 @@
       <article class="game" data-name="honkai star rail hsr"><div class="game-icon">🚄</div><h3>Honkai: Star Rail</h3><p>Oneiric Shard</p><button onclick="openOrder('Honkai: Star Rail','Oneiric Shard')">Pilih Produk</button></article>
       <article class="game" data-name="call of duty mobile codm"><div class="game-icon">🪖</div><h3>Call of Duty Mobile</h3><p>CP CODM</p><button onclick="openOrder('Call of Duty Mobile','CP')">Pilih Produk</button></article>
       <article class="game" data-name="valorant"><div class="game-icon">💥</div><h3>Valorant</h3><p>Valorant Points</p><button onclick="openOrder('Valorant','VP')">Pilih Produk</button></article>
-      <article class="game" data-name="roblox"><div class="game-icon">🧱</div><h3>Roblox</h3><p>Robux</p><button onclick="openOrder('Roblox','Robux')">Pilih Produk</button></article>
+      <article class="game" data-name="roblox"><div class="game-icon">🧱</div><h3>Roblox</h3><p>Robux</p><button onclick="openRobuxPicker()">Pilih Produk</button></article>
       <article class="game" data-name="steam wallet"><div class="game-icon">🎮</div><h3>Steam Wallet</h3><p>Steam Wallet Code</p><button onclick="openOrder('Steam Wallet','Steam Wallet Code')">Pilih Produk</button></article>
       <article class="game" data-name="aplikasi voucher lainnya"><div class="game-icon">🎁</div><h3>Aplikasi & Voucher</h3><p>Voucher digital lainnya</p><button onclick="openOrder('Aplikasi & Voucher','Voucher')">Pilih Produk</button></article>
     </section>
     <section class="how"><h2>Cara Order</h2><div class="steps"><div class="step"><b>01. Pilih Game</b>Pilih game atau voucher yang ingin dibeli.</div><div class="step"><b>02. Isi Detail</b>Masukkan ID akun dan nominal top up.</div><div class="step"><b>03. Chat Admin</b>Kirim format pesanan melalui WhatsApp untuk konfirmasi harga dan pembayaran.</div></div></section>
     <div class="footer">© <span id="year"></span> Melva.id. All rights reserved.</div>
   </main>
+
+  <div class="modal" id="robuxModal" role="dialog" aria-modal="true" aria-labelledby="robuxTitle">
+    <div class="dialog">
+      <div class="dialog-head"><h2 id="robuxTitle">Pilih Nominal Robux</h2><button class="close" onclick="closeRobuxPicker()" aria-label="Tutup">×</button></div>
+      <p>Pilih nominal Robux. Setelah dipilih, detail pesanan akan langsung dikirim ke WhatsApp admin.</p>
+      <div class="robux-list" id="robuxList"></div>
+      <div class="note">Harga sesuai daftar nominal Robux Melva.id.</div>
+    </div>
+  </div>
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><div class="dialog-head"><h2 id="modalTitle">Detail Pesanan</h2><button class="close" onclick="closeOrder()" aria-label="Tutup">×</button></div><p>Lengkapi detail berikut. Admin akan mengonfirmasi ketersediaan dan harga melalui WhatsApp.</p><form id="orderForm"><label class="field"><span>Game</span><input id="gameName" readonly /></label><label class="field"><span>Produk</span><input id="productName" readonly /></label><label class="field"><span>User ID / ID Akun</span><input id="userId" required placeholder="Masukkan User ID" /></label><label class="field"><span>Server / Zone ID (jika ada)</span><input id="serverId" placeholder="Masukkan Server ID (opsional)" /></label><label class="field"><span>Nominal / Paket</span><input id="nominal" required placeholder="Contoh: 86 Diamond" /></label><label class="field"><span>Catatan (opsional)</span><input id="notes" placeholder="Catatan tambahan" /></label><button class="wa" type="submit">Lanjutkan ke WhatsApp</button></form><div class="note">Harga dan metode pembayaran dikonfirmasi oleh admin.</div></div></div>
   <script>
     // Nomor WhatsApp admin Melva.id — format internasional tanpa tanda +
     const WA = '628895323909';
     const modal = document.getElementById('modal');
+    const robuxModal = document.getElementById('robuxModal');
+    const robuxPrices = [
+      {amount:100, price:16500},
+      {amount:150, price:24500},
+      {amount:200, price:32500},
+      {amount:250, price:40000},
+      {amount:300, price:48000},
+      {amount:350, price:56250},
+      {amount:400, price:65000},
+      {amount:500, price:80000}
+    ];
+    const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
+    function openRobuxPicker(){
+      const list = document.getElementById('robuxList');
+      list.innerHTML = robuxPrices.map(item =>
+        `<button class="robux-option" type="button" onclick="orderRobux(${item.amount},${item.price})"><b>${item.amount} Robux</b><span>${rupiah(item.price)}</span></button>`
+      ).join('');
+      robuxModal.classList.add('show');
+    }
+    function closeRobuxPicker(){robuxModal.classList.remove('show');}
+    function orderRobux(amount, price){
+      const msg = `Halo Admin Melva.id, saya ingin order Roblox.\\n\\nGame: Roblox\\nProduk: Robux\\nNominal: ${amount} Robux\\nHarga: ${rupiah(price)}\\n\\nMohon proses pesanannya. Terima kasih.`;
+      window.location.href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    }
+    robuxModal.addEventListener('click',e=>{if(e.target===robuxModal)closeRobuxPicker();});
+
     function openOrder(game, product){document.getElementById('gameName').value=game;document.getElementById('productName').value=product;modal.classList.add('show');document.getElementById('userId').focus();}
     function closeOrder(){modal.classList.remove('show');}
     modal.addEventListener('click',e=>{if(e.target===modal)closeOrder();});
